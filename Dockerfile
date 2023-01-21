@@ -15,7 +15,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.bak \
 
 COPY etc/apt/sources.list /etc/apt/sources.list
 COPY usr/share/keyrings/winehq-archive.key /usr/share/keyrings/winehq-archive.key
-COPY winetricks /var/winetricks
 
 RUN apt update \
         && apt install -y busybox software-properties-common ca-certificates openssl fonts-wqy-* xfonts-wqy cabextract gosu curl wget tzdata zip unzip \
@@ -46,11 +45,12 @@ RUN \
         && rm -rf /usr/share/wine/mono \
         && rm -rf  /home/user/.cache/* \
         && rm -rf /home/user/tmp/* \
-        && rm -rf /tmp/* \
-        && rm -rf /var/winetricks/*
+        && rm -rf /tmp/*
 
 COPY usr/local/bin/winescript usr/local/bin/winescript
-RUN chmod a+x usr/local/bin/winescript
+COPY usr/local/bin/bedrock_server_mod /usr/local/bin/bedrock_server_mod
+RUN chmod a+x /usr/local/bin/winescript
+RUN chmod a+x /usr/local/bin/bedrock_server_mod
 
 LABEL \
     org.opencontainers.image.authors="DiamondBlock <leefly2333@outlook.com>" \

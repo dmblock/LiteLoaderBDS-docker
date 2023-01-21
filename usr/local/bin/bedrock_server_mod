@@ -1,0 +1,4 @@
+#!/usr/bin/env winescript
+
+@echo off
+bedrock_server_mod.exe
