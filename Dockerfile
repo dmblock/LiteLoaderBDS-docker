@@ -60,7 +60,7 @@ RUN \
 
 COPY usr/local/bin/cmd usr/local/bin/cmd
 COPY usr/local/bin/bedrock_server_mod /usr/local/bin/bedrock_server_mod
-RUN chmod a+x /usr/local/bin/winescript
+RUN chmod a+x /usr/local/bin/cmd
 RUN chmod a+x /usr/local/bin/bedrock_server_mod
 
 LABEL \
