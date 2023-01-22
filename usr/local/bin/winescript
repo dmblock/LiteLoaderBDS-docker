@@ -6,7 +6,7 @@ FILE="/tmp/winescript_${$}_$(date '+%s%N').bat"
 trap '{ rm -f "${FILE}"; }' EXIT
 
 tail -n +2 "$1" > "$FILE"
-wine CMD.EXE /C "$FILE"
+wine CMD.EXE /C "$FILE" | cat
 echo
 
 exit
