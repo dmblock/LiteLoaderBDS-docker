@@ -2,10 +2,21 @@ FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV LANG='C.UTF-8' \
-        LC_ALL='C.UTF-8' \
+ENV HOME=/root \
         TZ=Asia/Shanghai \
-        HOME=/root
+        LANG="zh_CN.UTF-8" \
+        LANGUAGE="zh_CN:zh" \
+        LC_NUMERIC="zh_CN" \
+        LC_TIME="zh_CN" \
+        LC_MONETARY="zh_CN" \
+        LC_PAPER="zh_CN" \
+        LC_NAME="zh_CN" \
+        LC_ADDRESS="zh_CN" \
+        LC_TELEPHONE="zh_CN" \
+        LC_MEASUREMENT="zh_CN" \
+        LC_IDENTIFICATION="zh_CN" \
+        LC_ALL="zh_CN.UTF-8"
+
 
 ENV WINEDEBUG=-all
 
@@ -17,7 +28,7 @@ COPY etc/apt/sources.list /etc/apt/sources.list
 COPY usr/share/keyrings/winehq-archive.key /usr/share/keyrings/winehq-archive.key
 
 RUN apt update \
-        && apt install -y busybox software-properties-common ca-certificates openssl fonts-wqy-* xfonts-wqy cabextract gosu curl wget tzdata zip unzip \
+        && apt install -y language-pack-zh-hans busybox software-properties-common ca-certificates openssl fonts-wqy-* xfonts-wqy cabextract gosu curl wget tzdata zip unzip \
         && apt autoremove -y \
         && apt clean \
         && rm -rf /tmp/*
