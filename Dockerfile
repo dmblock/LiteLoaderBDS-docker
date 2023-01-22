@@ -58,13 +58,13 @@ RUN \
         && rm -rf /home/user/tmp/* \
         && rm -rf /tmp/*
 
-COPY usr/local/bin/winescript usr/local/bin/winescript
+COPY usr/local/bin/cmd usr/local/bin/cmd
 COPY usr/local/bin/bedrock_server_mod /usr/local/bin/bedrock_server_mod
 RUN chmod a+x /usr/local/bin/winescript
 RUN chmod a+x /usr/local/bin/bedrock_server_mod
 
 LABEL \
-    org.opencontainers.image.authors="DiamondBlock <leefly2333@outlook.com>" \
+    org.opencontainers.image.authors="DiamondBlock <ZH15904837658@163.com>" \
     org.opencontainers.image.description="Wine container for LiteLoaderBDS server." \
     org.opencontainers.image.documentation="https://github.com/dmblock/LiteLoaderBDS-docker/README.md" \
     org.opencontainers.image.licenses="GPL-3.0" \

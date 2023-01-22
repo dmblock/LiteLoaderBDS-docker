@@ -1,1 +1,1 @@
-docker build -t dmblock/liteloaderbds .
+docker build -t dmbk/liteloaderbds .
