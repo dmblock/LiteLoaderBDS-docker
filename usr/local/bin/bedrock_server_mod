@@ -1,4 +1,3 @@
-#!/usr/bin/env winescript
+#!/usr/bin/bash
 
-@echo off
-bedrock_server_mod.exe
+wine bedrock_server_mod.exe | cat

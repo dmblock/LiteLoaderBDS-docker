@@ -2,11 +2,11 @@
 
 set -eo pipefail
 
-FILE="/tmp/winescript_${$}_$(date '+%s%N').bat"
+FILE="/tmp/cmd_${$}_$(date '+%s%N').bat"
 trap '{ rm -f "${FILE}"; }' EXIT
 
 tail -n +2 "$1" > "$FILE"
-wine CMD.EXE /C "$FILE" | cat
+wine CMD.EXE /C "$FILE"
 echo
 
 exit
