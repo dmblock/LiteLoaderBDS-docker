@@ -2,22 +2,6 @@ FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV HOME=/root \
-        TZ=Asia/Shanghai \
-        LANG="zh_CN.UTF-8" \
-        LANGUAGE="zh_CN:zh" \
-        LC_NUMERIC="zh_CN" \
-        LC_TIME="zh_CN" \
-        LC_MONETARY="zh_CN" \
-        LC_PAPER="zh_CN" \
-        LC_NAME="zh_CN" \
-        LC_ADDRESS="zh_CN" \
-        LC_TELEPHONE="zh_CN" \
-        LC_MEASUREMENT="zh_CN" \
-        LC_IDENTIFICATION="zh_CN" \
-        LC_ALL="zh_CN.UTF-8"
-
-
 ENV WINEDEBUG=-all
 
 RUN mv /etc/apt/sources.list /etc/apt/sources.bak \
@@ -32,6 +16,21 @@ RUN apt update \
         && apt autoremove -y \
         && apt clean \
         && rm -rf /tmp/*
+
+ENV HOME=/root \
+        TZ=Asia/Shanghai \
+        LANG="zh_CN.UTF-8" \
+        LANGUAGE="zh_CN:zh" \
+        LC_NUMERIC="zh_CN" \
+        LC_TIME="zh_CN" \
+        LC_MONETARY="zh_CN" \
+        LC_PAPER="zh_CN" \
+        LC_NAME="zh_CN" \
+        LC_ADDRESS="zh_CN" \
+        LC_TELEPHONE="zh_CN" \
+        LC_MEASUREMENT="zh_CN" \
+        LC_IDENTIFICATION="zh_CN" \
+        LC_ALL="zh_CN.UTF-8"
 
 RUN dpkg --add-architecture i386 \
         && echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
