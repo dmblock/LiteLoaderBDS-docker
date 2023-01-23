@@ -48,7 +48,7 @@ RUN \
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod a+x /usr/local/bin/winetricks
 
-RUN wine wineboot
+RUN wine64 wineboot
 
 RUN \
         rm -rf /usr/share/wine/gecko \
