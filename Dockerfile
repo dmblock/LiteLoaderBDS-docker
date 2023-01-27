@@ -30,13 +30,14 @@ ENV HOME=/root \
         LC_TELEPHONE="zh_CN" \
         LC_MEASUREMENT="zh_CN" \
         LC_IDENTIFICATION="zh_CN" \
-        LC_ALL="zh_CN.UTF-8" \
-        PATH=$PATH:/opt/wine-stable/bin
+        LC_ALL="zh_CN.UTF-8"
 
-RUN echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
+RUN dpkg --add-architecture i386 \
+        && echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
-        && apt install -y --install-recommends wine-stable-amd64 \
-        && ln -s /opt/wine-stable/bin/wine64 /opt/wine-stable/bin/wine
+        && apt install -y --install-recommends wine-stable
+        && wine --version \
+        && wine64 --version
         
 ARG GECKO_VERSION=2.47.3
 
