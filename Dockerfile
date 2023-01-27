@@ -34,7 +34,7 @@ ENV HOME=/root \
 
 RUN echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
-        && apt install -y wine-stable
+        && apt install -y wine-stable-amd64
 
 ARG GECKO_VERSION=2.47.3
 ARG MONO_VERSION=7.4.0
@@ -46,7 +46,7 @@ RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubuser
         && chmod a+x /usr/local/bin/winetricks
 
 RUN wine64 wineboot \
-        && wine64 -v
+        && wine64 --version
 
 RUN \
         rm -rf /usr/share/wine/gecko \
