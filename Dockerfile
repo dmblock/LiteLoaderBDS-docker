@@ -35,9 +35,7 @@ ENV HOME=/root \
 RUN dpkg --add-architecture i386 \
         && echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
-        && apt install -y --install-recommends wine-stable \
-        && wine --version \
-        && wine64 --version
+        && apt install -y --install-recommends winehq-stable
         
 ARG GECKO_VERSION=2.47.3
 
