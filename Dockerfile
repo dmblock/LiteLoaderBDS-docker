@@ -30,14 +30,16 @@ ENV HOME=/root \
         LC_TELEPHONE="zh_CN" \
         LC_MEASUREMENT="zh_CN" \
         LC_IDENTIFICATION="zh_CN" \
-        LC_ALL="zh_CN.UTF-8"
+        LC_ALL="zh_CN.UTF-8" \
+        PATH=$PATH:/opt/wine-stable/bin
 
 RUN echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
-        && apt install -y wine-stable-amd64
-
+        && apt install -y wine-stable-amd64 \
+        && ln -s /opt/wine-stable/bin/wine64 /opt/wine-stable/bin/wine
+        
 ARG GECKO_VERSION=2.47.3
-ARG MONO_VERSION=7.4.0
+
 RUN \
         mkdir -p /usr/share/wine/gecko \
         && wget -O /usr/share/wine/gecko/wine-gecko-${GECKO_VERSION}-x86_64.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-gecko/${GECKO_VERSION}/wine-gecko-${GECKO_VERSION}-x86_64.msi"
