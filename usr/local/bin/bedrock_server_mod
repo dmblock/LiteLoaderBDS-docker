@@ -1,2 +1,2 @@
-#!/usr/bin/env cmd
-busybox bash -c ./bedrock_server_mod.exe
+#!/usr/bin/env bash
+wine64 bedrock_server_mod.exe
