@@ -32,8 +32,7 @@ ENV HOME=/root \
         LC_IDENTIFICATION="zh_CN" \
         LC_ALL="zh_CN.UTF-8"
 
-RUN dpkg --add-architecture i386 \
-        && echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
+RUN echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
         && apt install -y --install-recommends winehq-stable
 
@@ -42,13 +41,13 @@ ARG MONO_VERSION=7.4.0
 RUN \
         mkdir -p /usr/share/wine/gecko \
         && mkdir -p /usr/share/wine/mono \
-        && wget -O /usr/share/wine/gecko/wine-gecko-${GECKO_VERSION}-x86.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-gecko/${GECKO_VERSION}/wine-gecko-${GECKO_VERSION}-x86.msi" \
-        && wget -O /usr/share/wine/mono/wine-mono-${MONO_VERSION}-x86.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-mono/${MONO_VERSION}/wine-mono-${MONO_VERSION}-x86.msi"
+        && wget -O /usr/share/wine/gecko/wine-gecko-${GECKO_VERSION}-x86.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-gecko/${GECKO_VERSION}/wine-gecko-${GECKO_VERSION}-x86_64.msi"
         
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod a+x /usr/local/bin/winetricks
 
-RUN wine64 wineboot
+RUN wine64 wineboot \
+        && wine64 -v
 
 RUN \
         rm -rf /usr/share/wine/gecko \
