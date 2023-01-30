@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+env WINEDEBUG=-all env LC_ALL=zh_CN.UTF-8 wine64 bedrock_server_mod.exe

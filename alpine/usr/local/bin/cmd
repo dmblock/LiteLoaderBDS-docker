@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+FILE="/tmp/cmd_${$}_$(date '+%s%N').bat"
+trap '{ rm -f "${FILE}"; }' EXIT
+
+tail -n +2 "$1" > "$FILE"
+wine64 CMD.EXE /C "$FILE"
+echo
+
+exit
