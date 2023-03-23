@@ -4,9 +4,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ENV WINEDEBUG=-all
 
-RUN mv /etc/apt/sources.list /etc/apt/sources.bak \
+RUN mv etc/apt/sources.list /etc/apt/sources.bak \
         && echo 'nameserver 8.8.8.8' >> /etc/resolv.conf \
-        && echo 'nameserver 223.5.5.5' >> /etc/resolv.conf
+        && echo 'nameserver 223.5.5.5' >> /etc/resolv.conf \
+        && echo 'nameserver 114.114.114.114' >> /etc/resolv.conf
 
 COPY etc/apt/sources.list /etc/apt/sources.list
 COPY usr/share/keyrings/winehq-archive.key /usr/share/keyrings/winehq-archive.key
@@ -36,13 +37,7 @@ RUN dpkg --add-architecture i386 \
         && echo 'deb [arch=amd64,i386 signed-by=/usr/share/keyrings/winehq-archive.key] https://mirrors.tuna.tsinghua.edu.cn/wine-builds/ubuntu/ focal main' > /etc/apt/sources.list.d/winehq.list \
         && apt update -y \
         && apt install -y --install-recommends winehq-stable
-        
-ARG GECKO_VERSION=2.47.3
-
-RUN \
-        mkdir -p /usr/share/wine/gecko \
-        && wget -O /usr/share/wine/gecko/wine-gecko-${GECKO_VERSION}-x86_64.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-gecko/${GECKO_VERSION}/wine-gecko-${GECKO_VERSION}-x86_64.msi"
-        
+       
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod a+x /usr/local/bin/winetricks
 
