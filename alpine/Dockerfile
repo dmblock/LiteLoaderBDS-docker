@@ -25,7 +25,8 @@ RUN wine64 wineboot  \
 RUN rm -rf /usr/share/wine/gecko  \
         && rm -rf /home/user/.cache/*  \
         && rm -rf /home/user/tmp/*  \
-        && rm -rf /tmp/*
+        && rm -rf /tmp/* \
+        && chmod a+x /usr/local/bin/*
 
 LABEL \
     org.opencontainers.image.authors="DiamondBlock <ZH15904837658@163.com>" \
