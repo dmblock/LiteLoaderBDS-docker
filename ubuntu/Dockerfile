@@ -4,11 +4,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ENV WINEDEBUG=-all
 
-RUN mv etc/apt/sources.list /etc/apt/sources.bak \
-        && echo 'nameserver 8.8.8.8' >> /etc/resolv.conf \
-        && echo 'nameserver 223.5.5.5' >> /etc/resolv.conf \
-        && echo 'nameserver 114.114.114.114' >> /etc/resolv.conf
-
 COPY etc/apt/sources.list /etc/apt/sources.list
 COPY usr/share/keyrings/winehq-archive.key /usr/share/keyrings/winehq-archive.key
 
@@ -40,16 +35,6 @@ RUN dpkg --add-architecture i386 \
        
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod a+x /usr/local/bin/winetricks
-
-RUN wine64 wineboot \
-        && wine64 --version
-
-RUN \
-        rm -rf /usr/share/wine/gecko \
-        && rm -rf /usr/share/wine/mono \
-        && rm -rf  /home/user/.cache/* \
-        && rm -rf /home/user/tmp/* \
-        && rm -rf /tmp/*
 
 COPY usr/local/bin/cmd usr/local/bin/cmd
 COPY usr/local/bin/bedrock_server_mod /usr/local/bin/bedrock_server_mod
