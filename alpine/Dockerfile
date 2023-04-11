@@ -11,22 +11,10 @@ COPY usr/local/bin/cmd /usr/local/bin/cmd
 RUN apk update  \
         && apk add wine font-wqy-zenhei bash
 
-ARG GECKO_VERSION=2.47.3
-
-RUN mkdir -p /usr/share/wine/gecko  \
-        && wget -O /usr/share/wine/gecko/wine-gecko-${GECKO_VERSION}-x86_64.msi "https://mirrors.ustc.edu.cn/wine/wine/wine-gecko/${GECKO_VERSION}/wine-gecko-${GECKO_VERSION}-x86_64.msi"
-
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks  \
         && chmod a+x /usr/local/bin/winetricks
 
-RUN wine64 wineboot  \
-        && wine64 --version
-
-RUN rm -rf /usr/share/wine/gecko  \
-        && rm -rf /home/user/.cache/*  \
-        && rm -rf /home/user/tmp/*  \
-        && rm -rf /tmp/* \
-        && chmod a+x /usr/local/bin/*
+RUN chmod a+x /usr/local/bin/*
 
 LABEL \
     org.opencontainers.image.authors="DiamondBlock <ZH15904837658@163.com>" \
