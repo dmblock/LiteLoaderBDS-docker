@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV WINEDEBUG=-all
 
@@ -35,10 +35,9 @@ RUN dpkg --add-architecture i386 \
        
 RUN wget -O /usr/local/bin/winetricks https://ghproxy.com/https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
         && chmod a+x /usr/local/bin/winetricks
-
-COPY usr/local/bin/cmd usr/local/bin/cmd
-COPY usr/local/bin/bedrock_server_mod /usr/local/bin/bedrock_server_mod
+        
 RUN chmod a+x /usr/local/bin/*
+
 LABEL \
     org.opencontainers.image.authors="DiamondBlock <ZH15904837658@163.com>" \
     org.opencontainers.image.description="Wine container for LiteLoaderBDS server." \
